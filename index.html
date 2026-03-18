@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>計算トレーニング</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      text-align: center;
+      margin-top: 50px;
+      padding-bottom: 300px; /* ← ★ ここでページ下部に余白を追加 */
+    }
+    .calc-area {
+      display: inline-block;
+      text-align: right;
+      font-size: 2rem;
+      line-height: 1.4;
+      margin: 20px 0;
+    }
+    .underline {
+      border-top: 2px solid #000;
+      margin-top: 5px;
+      padding-top: 5px;
+    }
+    #answer, #answer2, #answer3 {
+      font-size: 2rem;
+      color: #007acc;
+      margin-top: 20px;
+    }
+    button {
+      font-size: 1rem;
+      padding: 8px 16px;
+      margin: 5px;
+    }
+    /* アクセスカウンター */
+    #counter {
+      position: fixed;
+      right: 10px;
+      bottom: 10px;
+      font-size: 0.8rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>2桁 × 1桁 の計算式</h1>
+  <div id="question" class="calc-area">ボタンを押して問題を出そう</div>
+  <div id="answer"></div>
+  <button id="generateBtn">問題を生成</button>
+  <button id="showAnswerBtn" disabled>答えを表示</button>
+
+  <hr style="margin:40px 0;">
+
+  <h1>2桁 × 2桁 の計算式</h1>
+  <div id="question2" class="calc-area">ボタンを押して問題を出そう</div>
+  <div id="answer2"></div>
+  <button id="generateBtn2">問題を生成</button>
+  <button id="showAnswerBtn2" disabled>答えを表示</button>
+
+  <hr style="margin:40px 0;">
+
+  <h1>3桁 × 2桁 の計算式</h1>
+  <div id="question3" class="calc-area">ボタンを押して問題を出そう</div>
+  <div id="answer3"></div>
+  <button id="generateBtn3">問題を生成</button>
+  <button id="showAnswerBtn3" disabled>答えを表示</button>
+
+  <!-- アクセスカウンター -->
+  <div id="counter"></div>
+
+  <script>
+    // --- 共通：ランダム整数 ---
+    function randInt(min, max) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    // ================================
+    //  2桁 × 1桁
+    // ================================
+    let currentA = null;
+    let currentB = null;
+    let startTime = null;
+
+    const questionEl = document.getElementById('question');
+    const answerEl = document.getElementById('answer');
+    const generateBtn = document.getElementById('generateBtn');
+    const showAnswerBtn = document.getElementById('showAnswerBtn');
+
+    generateBtn.addEventListener('click', () => {
+      currentA = randInt(10, 99);
+      currentB = randInt(1, 9);
+
+      questionEl.innerHTML = `
+        <div>${currentA}</div>
+        <div>× ${currentB}</div>
+        <div class="underline">&nbsp;</div>
+      `;
+
+      answerEl.textContent = "";
+      showAnswerBtn.disabled = false;
+      startTime = Date.now();
+    });
+
+    showAnswerBtn.addEventListener('click', () => {
+      if (currentA !== null && currentB !== null) {
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(2);
+        answerEl.textContent = `答え：${currentA * currentB}（${elapsed} 秒）`;
+      }
+    });
+
+    // ================================
+    //  2桁 × 2桁
+    // ================================
+    let currentC = null;
+    let currentD = null;
+    let startTime2 = null;
+
+    const questionEl2 = document.getElementById('question2');
+    const answerEl2 = document.getElementById('answer2');
+    const generateBtn2 = document.getElementById('generateBtn2');
+    const showAnswerBtn2 = document.getElementById('showAnswerBtn2');
+
+    generateBtn2.addEventListener('click', () => {
+      currentC = randInt(10, 99);
+      currentD = randInt(10, 99);
+
+      questionEl2.innerHTML = `
+        <div>${currentC}</div>
+        <div>× ${currentD}</div>
+        <div class="underline">&nbsp;</div>
+      `;
+
+      answerEl2.textContent = "";
+      showAnswerBtn2.disabled = false;
+      startTime2 = Date.now();
+    });
+
+    showAnswerBtn2.addEventListener('click', () => {
+      if (currentC !== null && currentD !== null) {
+        const elapsed2 = ((Date.now() - startTime2) / 1000).toFixed(2);
+        answerEl2.textContent = `答え：${currentC * currentD}（${elapsed2} 秒）`;
+      }
+    });
+
+    // ================================
+    //  3桁 × 2桁
+    // ================================
+    let currentE = null;
+    let currentF = null;
+    let startTime3 = null;
+
+    const questionEl3 = document.getElementById('question3');
+    const answerEl3 = document.getElementById('answer3');
+    const generateBtn3 = document.getElementById('generateBtn3');
+    const showAnswerBtn3 = document.getElementById('showAnswerBtn3');
+
+    generateBtn3.addEventListener('click', () => {
+      currentE = randInt(100, 999);
+      currentF = randInt(10, 99);
+
+      questionEl3.innerHTML = `
+        <div>${currentE}</div>
+        <div>× ${currentF}</div>
+        <div class="underline">&nbsp;</div>
+      `;
+
+      answerEl3.textContent = "";
+      showAnswerBtn3.disabled = false;
+      startTime3 = Date.now();
+    });
+
+    showAnswerBtn3.addEventListener('click', () => {
+      if (currentE !== null && currentF !== null) {
+        const elapsed3 = ((Date.now() - startTime3) / 1000).toFixed(2);
+        answerEl3.textContent = `答え：${currentE * currentF}（${elapsed3} 秒）`;
+      }
+    });
+
+    // ================================
+    //  アクセスカウンター
+    // ================================
+    const counterEl = document.getElementById('counter');
+    let count = Number(localStorage.getItem("accessCount") || 0);
+    count++;
+    localStorage.setItem("accessCount", count);
+    counterEl.textContent = `アクセス数：${count}`;
+  </script>
+
+</body>
+</html>
