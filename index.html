@@ -46,13 +46,28 @@
       margin: 5px;
     }
 
-    /* アクセスカウンター */
-    #counter {
+    /* ★ 右下のアクセスカウンターエリア */
+    #counterArea {
       position: fixed;
       right: 10px;
       bottom: 10px;
+      text-align: right;
       font-size: 0.8rem;
-      color: #555;
+      background: rgba(255,255,255,0.9);
+      padding: 8px 10px;
+      border-radius: 6px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.2);
+    }
+
+    #counterTitle {
+      font-weight: bold;
+      margin-bottom: 4px;
+      font-size: 0.9rem;
+    }
+
+    #counter {
+      color: #333;
+      margin-bottom: 10px;
     }
   </style>
 </head>
@@ -80,8 +95,43 @@
   <button id="generateBtn3">問題を生成</button>
   <button id="showAnswerBtn3" disabled>答えを表示</button>
 
-  <!-- アクセスカウンター -->
-  <div id="counter"></div>
+
+  <!-- ★ 右下のアクセスカウンターエリア -->
+  <div id="counterArea">
+
+    <!-- 自分のアクセスカウンター -->
+    <div id="counterTitle">自分のアクセスカウンター</div>
+    <div id="counter"></div>
+
+    <!-- 外部アクセスカウンター -->
+    <div id="counterTitle">みんなのアクセスカウンター</div>
+
+    <!-- ★ 外部カウンター（あなたが貼ってくれたコード） -->
+    <div id="externalCounter">
+      <!--タグはここから-->
+      <table border="0" cellspacing="0" cellpadding="0">
+        <tr>
+          <td align="center">
+            <a href="http://www.rays-counter.com/">
+              <img src="http://www.rays-counter.com/d1306_f6_010/69cb8b20ae72c/" alt="アクセスカウンター" border="0">
+            </a>
+          </td>
+        </tr>
+        <tr>
+          <td align="center">
+            <img src="http://www.rays-counter.com/images/counter_01.gif" border="0">
+            <img src="http://www.rays-counter.com/images/counter_02.gif" border="0">
+            <img src="http://www.rays-counter.com/images/counter_03.gif" border="0">
+            <img src="http://www.rays-counter.com/images/counter_04.gif" border="0">
+            <img src="http://www.rays-counter.com/images/counter_05.gif" border="0">
+          </td>
+        </tr>
+      </table>
+      <!--ここまで-->
+    </div>
+
+  </div>
+
 
   <script>
     // --- 共通：ランダム整数 ---
@@ -192,7 +242,7 @@
     });
 
     // ================================
-    //  アクセスカウンター
+    //  自分のアクセスカウンター
     // ================================
     const counterEl = document.getElementById('counter');
     let count = Number(localStorage.getItem("accessCount") || 0);
