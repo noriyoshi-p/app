@@ -3,13 +3,23 @@
 <head>
   <meta charset="UTF-8">
   <title>計算トレーニング</title>
+
   <style>
+    /* ★ iPhone のダークモードでも色が反転しないようにする */
+    html {
+      color-scheme: light;
+    }
+
+    /* ★ 背景と文字色を明示的に指定（反転対策） */
     body {
+      background-color: white;
+      color: black;
       font-family: sans-serif;
       text-align: center;
       margin-top: 50px;
-      padding-bottom: 300px; /* ← ★ ここでページ下部に余白を追加 */
+      padding-bottom: 300px;
     }
+
     .calc-area {
       display: inline-block;
       text-align: right;
@@ -17,21 +27,25 @@
       line-height: 1.4;
       margin: 20px 0;
     }
+
     .underline {
       border-top: 2px solid #000;
       margin-top: 5px;
       padding-top: 5px;
     }
+
     #answer, #answer2, #answer3 {
       font-size: 2rem;
       color: #007acc;
       margin-top: 20px;
     }
+
     button {
       font-size: 1rem;
       padding: 8px 16px;
       margin: 5px;
     }
+
     /* アクセスカウンター */
     #counter {
       position: fixed;
